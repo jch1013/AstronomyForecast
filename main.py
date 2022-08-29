@@ -1,5 +1,9 @@
-#import getPlanets as planets
+import getPlanets as planets
 import planet
+import DSO
 
-jupiter = planet.Planet("jupiter", 23, 4, 75, 230)
-print(jupiter)
+
+all_planets = planets.all
+for data in all_planets:
+    print(data)
+    print('\n')
