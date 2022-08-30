@@ -1,5 +1,4 @@
 import bs4
-from datetime import date
 from urllib.request import Request, urlopen
 
 def request_page(link):
@@ -12,16 +11,17 @@ def request_page(link):
 
 
 def get_data(html):
-    print('getting data')
-
-
-
-
-
+    data = html.select(".rise_highlight")
+    all_moon_data = data[0].findAll(lambda tag: tag.name == 'td')
+    rise = all_moon_data[0].text
+    apex = all_moon_data[1].text
+    sets = all_moon_data[3].text
+    moon_array = [rise, apex, sets]
+    return moon_array
 
 
 def get_moon(zipcode, today):
     link =f'https://www.almanac.com/astronomy/moon-rise-and-set/zipcode/{zipcode}/{today}'
     moon_html = request_page(link)
-    moon_data = get_data(moon_html)
-    return moon_data
+    moon_array = get_data(moon_html)
+    return moon_array
