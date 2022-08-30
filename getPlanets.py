@@ -1,5 +1,4 @@
 import bs4
-from datetime import date
 from urllib.request import Request, urlopen
 import planet
 
@@ -16,14 +15,14 @@ def request_page(link):
 #returns list of planet objects
 def get_data(html):
     planets = []
-    all_objects = html.select(".rise_highlight")
-    for object in all_objects:
-        name = object.find(lambda tag: tag.name == 'th').text
-        data = object.findAll(lambda tag: tag.name == 'td')
+    all_planets = html.select(".rise_highlight")
+    for obj in all_planets:
+        name = obj.find(lambda tag: tag.name == 'th').text
+        data = obj.findAll(lambda tag: tag.name == 'td')
         rise = data[0].text
         apex = data[1].text
-        set = data[3].text
-        new_planet = planet.Planet(name, rise, set, apex)
+        sets = data[3].text
+        new_planet = planet.Planet(name, rise, sets, apex)
         planets.append(new_planet)
     return planets
 
