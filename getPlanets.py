@@ -3,16 +3,17 @@ from urllib.request import Request, urlopen
 import planet
 
 
-#requests HTML content from original webpage
-#returns cleaned HTML content
+# requests HTML content from original webpage
+# returns cleaned HTML content
 def request_page(link):
     page_request = Request(link, headers={'User-Agent': 'Mozilla/5.0'})
     webpage = urlopen(page_request).read()
     html_content = bs4.BeautifulSoup(webpage, "html.parser")
     return html_content
 
-#collects data from HTML and creates planet objects
-#returns list of planet objects
+
+# collects data from HTML and creates planet objects
+# returns list of planet objects
 def get_data(html):
     planets = []
     all_planets = html.select(".rise_highlight")
@@ -27,15 +28,10 @@ def get_data(html):
     return planets
 
 
-#can accept zipcode input from main and calls all functions
-#returns list of all planet objects
+# can accept zipcode input from main and calls all functions
+# returns list of all planet objects
 def get_planets(zipcode, today):
     link = f'https://www.almanac.com/astronomy/planets-rise-and-set/zipcode/{zipcode}/{today}'
     planet_html = request_page(link)
     all = get_data(planet_html)
     return all
-
-
-
-
-
