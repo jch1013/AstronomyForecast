@@ -1,9 +1,7 @@
-import emailFunctions as email
-import os
-from base64 import urlsafe_b64decode, urlsafe_b64encode
+from base64 import urlsafe_b64decode
 
 
-def parse_parts(service, parts, folder_name, message):
+def parse_parts(service, parts, message):
     """
     Utility function that parses the content of an email partition
     """
@@ -15,7 +13,7 @@ def parse_parts(service, parts, folder_name, message):
             if part.get("parts"):
                 # recursively call this function when we see that a part
                 # has parts inside
-                parse_parts(service, part.get("parts"), folder_name, message)
+                parse_parts(service, part.get("parts"), message)
             if mime_type == "text/plain":
                 # if the email part is text plain
                 if data:
@@ -23,14 +21,13 @@ def parse_parts(service, parts, folder_name, message):
                     print(text)
 
 
-
+# modify read message function to return an email object??
 
 def read_message(service, message):
     """
     This function takes Gmail API `service` and the given `message_id` and does the following:
         - Downloads the content of the email
         - Prints email basic information (To, From, Subject & Date) and plain/text parts
-        - Creates a folder for each email based on the subject
         - Downloads text/html content (if available) and saves it under the folder created as index.html
         - Downloads any file that is attached to the email and saves it in the folder created
     """
@@ -39,10 +36,10 @@ def read_message(service, message):
     payload = msg['payload']
     headers = payload.get("headers")
     parts = payload.get("parts")
-    folder_name = "email"
     has_subject = False
     if headers:
         # this section prints email basic info
+        email_data = []
         for header in headers:
             name = header.get("name")
             value = header.get("value")
@@ -55,8 +52,6 @@ def read_message(service, message):
             if name.lower() == "subject":
                 # make our boolean True, the email has "subject"
                 has_subject = True
-                # make a directory with the name of the subject
-                folder_name = 'test_folder'
                 # we will also handle emails with the same subject name
                 print("Subject:", value)
             if name.lower() == "date":
@@ -64,13 +59,9 @@ def read_message(service, message):
                 print("Date:", value)
     if not has_subject:
         print("no subject")
-    parse_parts(service, parts, folder_name, message)
+    parse_parts(service, parts, message)
     print("="*50)
 
 
-service = email.gmail_authenticate()
-results = email.search_messages(service, "lemon")
-print(f"Found {len(results)} results.")
-for mail in results:
-    read_message(service, mail)
+
 
