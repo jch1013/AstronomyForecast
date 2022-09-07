@@ -1,10 +1,10 @@
 class Planet:
-    def __init__(self, name, rise, set, apex):
+    def __init__(self, name, rise, sets, apex):
         self.name = name
         self.rise = rise
-        self.set = set
+        self.sets = sets
         self.apex = apex
 
     def __str__(self):
-        return f"Planet: {self.name}\nRise time: {self.rise}\nSet time: {self.set}\nApex: {self.apex}"
+        return f"Planet: {self.name}\nRise time: {self.rise}\nSet time: {self.sets}\nApex: {self.apex}"
 
