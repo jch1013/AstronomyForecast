@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import bs4
+
+import getMoon
 import getPlanets
 
 
@@ -49,6 +51,10 @@ def make_report(lat, lng):
     link = make_link([lat, lng], time_zone)
     all_html = request_page(link)
     planets = getPlanets.get_planets(all_html)
+    moon_report = getMoon.get_moon(all_html)
+    report_body += moon_report
+
+    report_body += "\n\n*****Planets*****\n\n"
     for p in planets:
         report_body += str(p)
         report_body += "\n----------\n"
