@@ -3,7 +3,7 @@ import planet
 
 # collects data from HTML and creates planet objects
 # returns list of planet objects
-def get_planets(html):
+def get_planet_data(html):
     planets = []
     all_planet_html = html.select(".lightgreybox")[1]
     all_planets = all_planet_html.findAll(lambda tag: tag.name == 'tr')
@@ -16,4 +16,11 @@ def get_planets(html):
     return planets
 
 
+def get_planets(html):
+    planet_data = get_planet_data(html)
+    planet_report = "\n-----Planets-----\n\n"
+    for p in planet_data:
+        planet_report += str(p)
+        planet_report += "\n----------\n"
+    return planet_report
 
