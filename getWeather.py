@@ -6,10 +6,15 @@ coordinates and the Beautiful Soup library to process and extract the data. Data
 import bs4
 import requests
 
-
+# This function returns the forecast at a given location for tonight
 def get_forecast(lat, lng):
     link = f'https://forecast.weather.gov/MapClick.php?lon={lng}&lat={lat}'
     page = requests.get(link)
     html = bs4.BeautifulSoup(page.text, "html.parser")
-    forecast = html.select('.col-sm-10.forecast-text')[1].text
+
+    daytime = (html.select('.col-sm-2.forecast-label')[0].text == "Today")
+    if daytime:
+        forecast = html.select('.col-sm-10.forecast-text')[1].text
+    else:
+        forecast = html.select('.col-sm-10.forecast-text')[0].text
     return forecast
