@@ -42,7 +42,7 @@ def read_message(service, message):
         for header in headers:
             name = header.get("name")
             value = header.get("value")
-            print_mail(name, value)
+            # print_mail(name, value)
             if name.lower() == "subject":
                 # make our boolean True, the email has "subject"
                 has_subject = True
