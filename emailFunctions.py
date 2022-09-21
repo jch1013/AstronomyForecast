@@ -41,3 +41,13 @@ def search_messages(service, query):
         if 'messages' in result:
             messages.extend(result['messages'])
     return messages
+
+
+def delete_messages(service, query):
+    messages_to_delete = search_messages(service, query)
+    return service.users().messages().batchDelete(
+      userId='me',
+      body={
+          'ids': [ msg['id'] for msg in messages_to_delete]
+      }
+    ).execute()
