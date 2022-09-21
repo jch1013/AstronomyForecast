@@ -23,4 +23,4 @@ def get_forecast(lat, lng):
         forecast = html.select('.col-sm-10.forecast-text')[1].text
     else:
         forecast = html.select('.col-sm-10.forecast-text')[0].text
-    return forecast
+    return "Weather: " + forecast
