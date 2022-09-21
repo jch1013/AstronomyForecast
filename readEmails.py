@@ -39,29 +39,36 @@ def read_message(service, message):
     has_subject = False
     if headers:
         # this section prints email basic info
-        email_data = []
         for header in headers:
             name = header.get("name")
             value = header.get("value")
-            if name.lower() == 'from':
-                # we print the From address
-                print("From:", value)
-            if name.lower() == "to":
-                # we print the To address
-                print("To:", value)
+            print_mail(name, value)
             if name.lower() == "subject":
                 # make our boolean True, the email has "subject"
                 has_subject = True
+                location = value
                 # we will also handle emails with the same subject name
-                print("Subject:", value)
-            if name.lower() == "date":
-                # we print the date when the message was sent
-                print("Date:", value)
+            if name.lower() == 'from':
+                return_to = value;
     if not has_subject:
         print("no subject")
     parse_parts(service, parts, message)
-    print("="*50)
+    print("=" * 50)
+    return [location, return_to]
 
 
-
-
+def print_mail(name, value):
+    if name.lower() == 'from':
+        # we print the From address
+        print("From:", value)
+    if name.lower() == "to":
+        # we print the To address
+        print("To:", value)
+    if name.lower() == "subject":
+        # make our boolean True, the email has "subject"
+        has_subject = True
+        # we will also handle emails with the same subject name
+        print("Subject:", value)
+    if name.lower() == "date":
+        # we print the date when the message was sent
+        print("Date:", value)
