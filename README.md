@@ -5,6 +5,14 @@ of the sun, moon, planets and other objects at that specific location. This prog
 into a single email, allowing the information to be easily printed and minimizing the need for electronic screens at 
 night.
 
-(add information on how to use)
+To use this service, simply send an email to <astroforecasttonight@gmail.com> with the desired location in the subject
+line. This program will accept an address, a zipcode, the name of a city or coordinates as valid locations. A reply
+email will be sent with important information for seeing conditions at night. A template email is shown below:
 
-()
+To: astroforecasttonight@gmail.com
+From: <your_email>
+Subject: Los Angeles
+Body: (leave this blank)
+
+NOTE: This program only works for locations within the United States, and data provided for international locations
+may be either incorrect or missing.
