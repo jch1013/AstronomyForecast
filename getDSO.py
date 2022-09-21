@@ -37,7 +37,7 @@ def dso_report(html):
 
     # Add galaxies to report
     galaxies = get_galaxies(html)
-    report += "-----Galaxies-----"
+    report += "\n-----Galaxies-----\n"
     for g in galaxies:
         report += str(g)
         report += "----------\n"
