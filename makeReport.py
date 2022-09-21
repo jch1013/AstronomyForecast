@@ -42,22 +42,23 @@ def request_page(url):
             EC.presence_of_element_located((By.CLASS_NAME, "lightgreybox"))
         )
     finally:
-        # driver.quit()
         pass
     html = driver.page_source
     html_content = bs4.BeautifulSoup(html, "html.parser")
     return html_content
 
 
+# This function makes calls to all scripts that gather data, and assembles the information into a printable report
 def make_report(lat, lng):
-    report_body = "-----General-----\n"
+    # if Google Maps api cannot find the location, return an error message
+    if lat == 0 and lng == 0:
+        return error_message
+    report_body = "-----General Information-----\n"
     time_zone = get_timezone(lat, lng)
     link = make_link([lat, lng], time_zone)
-    print(link)
 
     # Add weather data to report
     weather = getWeather.get_forecast(lat, lng)
-    report_body += "Weather: "
     report_body += weather + '\n'
 
     # Information on planets, moon, deep sky objects
@@ -75,6 +76,13 @@ def make_report(lat, lng):
     dso_report = getDSO.dso_report(all_html)
     report_body += dso_report
 
-
     return report_body
 
+
+error_message = ("**Error: Invalid location. Please retry with a valid location**\n\nTo use this service, simply send "
+                 "an email to <astroforecasttonight@gmail.com> with the desired location in the subject line. This "
+                 "program will accept an address, a zipcode, the name of a city or coordinates as valid locations. A "
+                 "reply email will be sent with important information for seeing conditions at night. A template "
+                 "email is shown below:\n\nTo: astroforecasttonight@gmail.com\nFrom: <your_email>\nSubject: Los "
+                 "Angeles\n Body: (leave this blank)\n\nNOTE: This program only works for locations within the United "
+                 "States, and data provided for international locations may be either incorrect or missing.")

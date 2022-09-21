@@ -18,9 +18,9 @@ def get_planet_data(html):
 
 def get_planets(html):
     planet_data = get_planet_data(html)
-    planet_report = "\n-----Planets-----\n\n"
+    planet_report = "\n-----Planets-----\n"
     for p in planet_data:
         planet_report += str(p)
-        planet_report += "\n----------\n"
+        planet_report += "\n\n"
     return planet_report
 

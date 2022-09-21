@@ -51,12 +51,12 @@ def read_message(service, message):
             if name.lower() == 'from':
                 return_to = value;
     if not has_subject:
-        print("no subject")
+        # set location to 0,0 to trigger error message
+        location = "0,0"
     parse_parts(service, parts, message)
-    print("=" * 50)
     return [location, return_to]
 
-
+# helper function used in development and debugging
 def print_mail(name, value):
     if name.lower() == 'from':
         # we print the From address

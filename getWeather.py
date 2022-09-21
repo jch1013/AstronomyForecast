@@ -10,7 +10,6 @@ import requests
 # This function returns the forecast at a given location for tonight
 def get_forecast(lat, lng):
     link = f'https://forecast.weather.gov/MapClick.php?lon={lng}&lat={lat}'
-    print(link)
     page = requests.get(link)
     html = bs4.BeautifulSoup(page.text, "html.parser")
 
@@ -23,4 +22,4 @@ def get_forecast(lat, lng):
         forecast = html.select('.col-sm-10.forecast-text')[1].text
     else:
         forecast = html.select('.col-sm-10.forecast-text')[0].text
-    return "Weather: " + forecast
+    return "Weather: " + forecast + "\n"

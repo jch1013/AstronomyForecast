@@ -40,12 +40,12 @@ def dso_report(html):
     report += "\n-----Galaxies-----\n"
     for g in galaxies:
         report += str(g)
-        report += "----------\n"
+        report += "\n"
 
     # Add clusters to report
     clusters = get_globluar_clusters(html)
     report += "\n-----Globular Clusters-----\n"
     for c in clusters:
         report += str(c)
-        report += "----------\n"
+        report += "\n"
     return report

@@ -17,7 +17,7 @@ def get_moon_data(html):
 
 def get_moon(html):
     data = get_moon_data(html)
-    report = "The Moon:"
+    report = "Moon Information:"
     moonrise = f'Rise time: {data[0]}'
     moonset = f'Set time: {data[1]}'
     apex = f'Apex time: {data[2]}'
