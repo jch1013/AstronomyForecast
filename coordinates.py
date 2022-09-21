@@ -21,4 +21,4 @@ def lat_long(location):
         lng = results['geometry']['location']['lng']
     except:
         pass
-    return lat, lng
+    return [lat, lng]
