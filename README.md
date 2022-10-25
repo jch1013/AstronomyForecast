@@ -14,5 +14,8 @@ From: <your_email>
 Subject: Los Angeles
 Body: (leave this blank)
 
+<strong>** This project is not currently running. Work to constantly respond to emails is in progress **</strong>
+
+
 NOTE: This program only works for locations within the United States, and data provided for international locations
 may be either incorrect or missing.
